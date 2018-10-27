@@ -1,4 +1,19 @@
 $(document).ready(function () {
+   
+    function callOtherDomain() {
+        if (invocation) {
+            invocation.open('GET', url, true);
+            invocation.onreadystatechange = handler;
+            invocation.send();
+        }
+    }
+    callOtherDomain()
+    var invocation = new XMLHttpRequest();
+   
+    var url = "https://api.giphy.com/v1/gifs/search";
+   
+    
+    
     var topics = ["Super Natural", "Adventure Time", "Lost", "The Walking Dead", "Breaking Bad", "Rick and Morty"]
     var apiKey = "OC8I7C9cUz4LD70kPD7K0G7c4yCqhUYH";
     topics.forEach(function (element) {
@@ -11,19 +26,29 @@ $(document).ready(function () {
 
     })
 
+    // function postGIF(){
+    //     var gifRow = $("<tr>");
+    //     var gifInRow = $("<td>").html(data.embed_url);
+    //     console.log(gifInRow, gifRow)
+    // }
+
     $(".Topics").on("click", function (event) {
         var TVshow = $(this).attr("data-name")
-        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=OC8I7C9cUz4LD70kPD7K0G7c4yCqhUYH&q=" + TVshow + "&limit=25&offset=0&rating=PG-13&lang=en"
-        console.log(TVshow)
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=apple&limit=25&offset=0&rating=PG-13&lang=en&api_key=OC8I7C9cUz4LD70kPD7K0G7c4yCqhUYH"
+        console.log(queryURL)
         $.ajax({
                 URL: queryURL,
-                method: "GET",
+                // method: 'GET'
 
             })
             .then(function (response) {
-                console.log(response)
+               console.log(response)
+
             })
     })
+  
+
+    
 
     // function printbtn() {
     //     for (var i = 0; i < topics.length; i++) {
